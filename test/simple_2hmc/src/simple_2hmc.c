@@ -117,30 +117,26 @@ extern int main( int argc, char **argv )
 	 */
 	if( num_devs > 1 )
 	{ 
-	    /* If there are multiple devices, then I need to connect them */
-        /* HMC 0 link 1 and 2 connected to the host */
-        ret = 0;
-        
-        // suppose num_links = 4
-        // This is the link config between Host and Cube0, 
-        // src_dev = num_devs + 1; dest_dev = 0; src_link = 0, 1; dest_link = 0, 1
+         /* Host and HMC0 */
+                                  /* hmc,   src_dev, dest_dev, src_link, dest_link, type */
 
-        /* Host and HMC0 */
-                                /* hmc,   src_dev, dest_dev, src_link, dest_link, type */
-        ret = hmcsim_link_config(&hmc, (num_devs+1), 0, 0, 0, HMC_LINK_HOST_DEV);
-        ret = hmcsim_link_config(&hmc, (num_devs+1), 0, 1, 1, HMC_LINK_HOST_DEV); 
+        ret += hmcsim_link_config( &hmc, (num_devs + 1), 0, 0, 0, HMC_LINK_HOST_DEV );
+        ret += hmcsim_link_config( &hmc, (num_devs + 1), 0, 1, 1, HMC_LINK_HOST_DEV );
 
-        // This is the link config between Cube0 and Cube1,
-        // src_dev = 0; dest_dev = 1; src_link = 2, 3; dest_link = 2, 3.
-        ret = hmcsim_link_config(&hmc, 0, 1, 2, 2, HMC_LINK_DEV_DEV);
-        ret = hmcsim_link_config(&hmc, 0, 1, 3, 3, HMC_LINK_DEV_DEV);
+               /* Host and HMC1 */
+        ret += hmcsim_link_config( &hmc, (num_devs + 1), 1, 2, 2, HMC_LINK_HOST_DEV );
+        ret += hmcsim_link_config( &hmc, (num_devs + 1), 1, 3, 3, HMC_LINK_HOST_DEV );
+
+               /* HMC0 and HMC1 */
+        ret += hmcsim_link_config( &hmc, 0, 1, 2, 0, HMC_LINK_DEV_DEV );
+        ret += hmcsim_link_config( &hmc, 0, 1, 3, 1, HMC_LINK_DEV_DEV );
 
 		if( ret != 0 ){ 
-				printf( "FAILED TO INIT LINK %d\n", i );
+				printf( "FAILED TO INIT LINK\n");
 				hmcsim_free( &hmc );
 				return -1;
 		}else{ 
-				printf( "SUCCESS : INITIALIZED LINK %d\n", i );
+				printf( "SUCCESS : INITIALIZED LINK\n");
 			}
 	}else{ 
 		/* 
