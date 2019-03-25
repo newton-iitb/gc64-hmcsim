@@ -123,9 +123,6 @@ extern int main( int argc, char **argv )
         ret += hmcsim_link_config( &hmc, (num_devs + 1), 0, 0, 0, HMC_LINK_HOST_DEV );
         ret += hmcsim_link_config( &hmc, (num_devs + 1), 0, 1, 1, HMC_LINK_HOST_DEV );
 
-               /* Host and HMC1 */
-        ret += hmcsim_link_config( &hmc, (num_devs + 1), 1, 2, 2, HMC_LINK_HOST_DEV );
-        ret += hmcsim_link_config( &hmc, (num_devs + 1), 1, 3, 3, HMC_LINK_HOST_DEV );
 
                /* HMC0 and HMC1 */
         ret += hmcsim_link_config( &hmc, 0, 1, 2, 0, HMC_LINK_DEV_DEV );

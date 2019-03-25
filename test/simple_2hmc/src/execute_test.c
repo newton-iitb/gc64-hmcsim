@@ -296,7 +296,7 @@ extern int execute_test(	struct hmcsim_t *hmc,
 
 			/* distribute request across various links */
 			link++;
-			if( link == hmc->num_links){
+			if( link == hmc->num_links - 2){
 				/* -- TODO : look at the number of connected links
 				 * to the host processor
 				 */
