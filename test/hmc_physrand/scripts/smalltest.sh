@@ -1,7 +1,7 @@
 #!/bin/bash
 # - executes a test of a bcopy for a 4GB device [2GB bcopy]
 
-PHYSRAND=../physrand
+PHYSRAND=/home/newton/newton/research/code/goblinCore/2HMCs/gc64-hmcsim/test/hmc_physrand/physrand
 
 BANKS=16
 CAPACITY=4
